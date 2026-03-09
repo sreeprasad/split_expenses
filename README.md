@@ -72,13 +72,6 @@ For groups of 3–7 people the greedy approach produces optimal or near-optimal 
 
 The script uses `scale=3` in `bc` for all division, giving sub-cent precision. Real-world rounding differences of `$0.001` are negligible and consistent with how apps like Venmo and Splitwise handle splits.
 
-## Bugs Fixed (from original)
-
-| Bug | Fix |
-|-----|-----|
-| Typo `$temp_temp_debtors` in `rm` | Corrected to `$temp_debtors` |
-| File descriptors 3 & 4 left open | Added `exec 3<&-` and `exec 4<&-` after loop |
-| `bc` producing `-0` breaking comparisons | Added `sed 's/^-0$/0/'` after subtraction |
 
 ## Limitations
 
