@@ -12,7 +12,7 @@ A lightweight Bash script to track shared expenses and calculate who owes whom. 
 ## Requirements
 
 - Bash 4+ (macOS users: `brew install bash`)
-- `bc` (usually pre-installed on Linux/macOS)
+- `bc` (usually pre installed on Linux/macOS)
 
 ## Usage
 
@@ -66,18 +66,17 @@ At settlement time the script:
 
 ### Why not optimal (minimum transactions) algorithm?
 
-For groups of 3–7 people the greedy approach produces optimal or near-optimal results. The theoretical worst case requires 10+ people with a very specific balance distribution — unlikely in real-world use.
+For groups of 3–7 people the greedy approach produces optimal or near optimal results. The theoretical worst case requires 10+ people with a very specific balance distribution which is unlikely in real world use.
 
 ## Precision
 
-The script uses `scale=3` in `bc` for all division, giving sub-cent precision. Real-world rounding differences of `$0.001` are negligible and consistent with how apps like Venmo and Splitwise handle splits.
-
+The script uses `scale=3` in `bc` for all division, giving subcent precision. Real world rounding differences of `$0.001` are negligible.
 
 ## Limitations
 
 - Requires Bash 4+ (associative arrays)
 - Not ideal for 10+ people but not for larger groups
-- No multi-currency support
+- No multi currency support
 
 ## License
 
