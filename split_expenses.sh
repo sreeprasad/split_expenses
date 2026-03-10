@@ -22,21 +22,22 @@ calculate_settlement() {
     echo "Total: \$$total_spent | Individual Share: \$$share"
     echo "--------------------------------"
 
- 
-    declare -A balance
+    balance_names=()
+    balance_vals=()
     for name in "${names[@]}"; do
         paid=$(awk -F'|' -v n="$name" '$1==n {sum+=$3} END {print sum+0}' "$LEDGER")
-        balance["$name"]=$(echo "$paid - $share" | bc)
+        balance_names+=("$name")
+        balance_vals+=($(echo "$paid - $share" | bc))
     done
-
  
     echo "Settlement Plan:"
 
     temp_creditors=$(mktemp)
     temp_debtors=$(mktemp)
 
-    for name in "${names[@]}"; do
-        val=${balance[$name]}
+    for i in "${!balance_names[@]}"; do
+        name=${balance_names[$i]}
+        val=${balance_vals[$i]}
         if (( $(echo "$val > 0" | bc -l) )); then
             echo "$val $name" >> "$temp_creditors"
         elif (( $(echo "$val < 0" | bc -l) )); then
